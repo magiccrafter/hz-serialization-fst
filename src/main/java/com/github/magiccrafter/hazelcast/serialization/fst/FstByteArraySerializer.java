@@ -34,12 +34,21 @@ import java.io.Serializable;
 public class FstByteArraySerializer<T extends Serializable> implements ByteArraySerializer<T> {
 
     /** FSTConfiguration caches metadata and is being reused for better performance. */
-    private final static FSTConfiguration conf = FSTConfiguration.createDefaultConfiguration();
+    private final FSTConfiguration conf;
     private final int typeId;
 
 
+    /**
+     * Create a serializer with default FST Configuration {@link FSTConfiguration#createDefaultConfiguration()}
+     * @param typeId
+     */
     public FstByteArraySerializer(int typeId) {
+        this(typeId, FSTConfiguration.createDefaultConfiguration());
+    }
+
+    public FstByteArraySerializer(int typeId, FSTConfiguration conf) {
         this.typeId = typeId;
+        this.conf = conf;
     }
 
     @Override
